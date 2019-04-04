@@ -1,6 +1,7 @@
 $(document).ready(function(){
 
     
+
 var correct = 0;
 var incorrect = 0;
 var notAnswered = 0;
@@ -50,3 +51,5 @@ var newArray =[];
 
 // questions:
    In 
+
+})
