@@ -6,8 +6,10 @@ var incorrect = 0;
 var notAnswered = 0;
 var timer = 15;
 var userGuess ="";
-
+var Answer =0;
+var pick;
 var newArray =[];
+
 
     //setting event listeners
     $("#reset").hide();
@@ -46,7 +48,24 @@ var newArray =[];
 
 
    //stopping timer 
+   function stop () {
+       running = false;
+       clearInterval(intervalId);
+   }
+console.log(stop);
 
+// questions picked randomly from array?
+function displayQuestion () {
+    index = Math.floor(Math.random()*trivia.length);
+    pick = trivia[i];
 
-// questions:
-   In 
+    $("#question").html("<h2>" + pick.question + "</h2>");
+    for (var i =0; i <pick.answered.length; i++) {
+        var userChoice = $("<div>");
+        userChoice.addClass("answerchoice");
+        userChoice.html(pick.answered[i]);
+        userChoice.attr("data-guess", i);
+        $("#answer").append(userChoice);
+    }
+}
+console.log(displayQuestion);
