@@ -4,7 +4,7 @@ var  trivia = [
         question: "Who claims that he has worked on the Human Genome Project?",
         choice: ["Eugene", "Abraham", "Gareth", "Rosita"],
         answer: 0,
-        img: "assets/images/genome.jpg"
+        img: "../images/genome.jpg"
         },
         {
         question: "Quote the person that said this 'In this life now, you kill or you die. Or you die and you kill'?",
@@ -46,13 +46,13 @@ var  trivia = [
         question: "What fictional place is Rick originally from?",
         choice: ["Texas", "Georgia", "New York", "Neveda"],
         answer: 1,
-        img: "assets/images/rick.jpg"
+        img: "assts/images/rick.jpg"
        }];
     
 var  correct = 0;
 var  incorrect = 0;
 var  notAnswered = 0;
-var  run = false;
+var  running = false;
 var questionCount = trivia.length;
 var index;
 var  timer = 15;
@@ -69,7 +69,7 @@ $("#reset").hide();
 $("#play").on("click", function () {
        $("#play").hide();
        displayQuestion();
-       runningTimer();
+       runTimer();
        for (var  i=0; i < trivia.length; i++) {
            holder.push(trivia[i]);
        }
@@ -93,7 +93,7 @@ function decrement () {
            notAnswered++;
            stop();
            $("#answer").html("<p>Time's Up!, The correct answer is: " + pick.choice[pick.answer]  + "</p>");
-           hidepic();
+           hidepictureture();
        }
    }
 
@@ -128,19 +128,19 @@ $(".answerChoice").on("click", function () {
             correct++;
             userGuess ="";
             $("#answer").html("<p> Correct!</p>");
-            hidePic();
+            hidepicture();
         }
         else {
             stop();
             incorrect++;
             userGuess="";
             $("#answer").html("<p>Wrong! The correct answer is: " + pick.choice[pick.answer] + "</p>");
-            hidePic();
+            hidepicture ();
             }
         })
         }
 
-function hidePic () {
+function hidepicture () {
     $("#answer").append("<img src=" + pick.photo + ">");
     newArray.push(pick);
     trivia.splice(index,1);
