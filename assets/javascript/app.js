@@ -1,7 +1,6 @@
 $(document).ready(function(){
-
-const trivia = [
-    {
+var  trivia = [
+        {
         question: "Who claims that he has worked on the Human Genome Project?",
         choice: ["Eugene", "Abraham", "Gareth", "Rosita"],
         answer: 0,
@@ -49,51 +48,49 @@ const trivia = [
         answer: 1,
         img: "assets/images/rick.jpg"
        }];
-]
     
-const correct = 0;
-const incorrect = 0;
-const notAnswered = 0;
-const run = false;
-const questionCount = trivia.length;
-const index;
-const timer = 15;
-const intervalId;
-const userGuess ="";
-const pick;
-const holder = [];
-const newArray =[];
+var  correct = 0;
+var  incorrect = 0;
+var  notAnswered = 0;
+var  run = false;
+var questionCount = trivia.length;
+var index;
+var  timer = 15;
+var  intervalId;
+var  userGuess ="";
+var  pick;
+var  holder = [];
+var  newArray =[];
 
 
     //setting event listeners
-    $("#reset").hide();
+$("#reset").hide();
    //on click to start the game
-   $("#play").on("click", function () {
+$("#play").on("click", function () {
        $("#play").hide();
        displayQuestion();
        runningTimer();
-       for (const i=0; i < trivia.length; i++) {
+       for (var  i=0; i < trivia.length; i++) {
            holder.push(trivia[i]);
        }
    })
 
    //starting timer
-   function runTime () {
+function runTimer () {
        if (!running) {
            intervalId = setInterval (decrement, 2000);
            running = true;
        }
-       console.log(runTime);
    }
 
    //timer counting down 
-   function decrement () {
-       $("#timeleft").html("<h3>Time remaining: " + timer + "</h3>");
+function decrement () {
+       $("#time").html("<h3>Time remaining: " + timer + "</h3>");
        timer --;
 
        //if time reaches 0
        if (timer === 0) {
-           notAnsweredCount++;
+           notAnswered++;
            stop();
            $("#answer").html("<p>Time's Up!, The correct answer is: " + pick.choice[pick.answer]  + "</p>");
            hidepic();
@@ -102,27 +99,24 @@ const newArray =[];
 
 
    //stopping timer 
-   function stop () {
+function stop () {
        running = false;
        clearInterval(intervalId);
    }
-console.log(stop);
 
 // questions picked randomly from array?
 function displayQuestion () {
     index = Math.floor(Math.random()*trivia.length);
-    pick = trivia[i];
+    pick = trivia[index];
 
     $("#question").html("<h2>" + pick.question + "</h2>");
-    for (const i =0; i <pick.answered.length; i++) {
-        const userChoice = $("<div>");
+    for (var  i =0; i <pick.choice.length; i++) {
+        var userChoice = $("<div>");
         userChoice.addClass("answerchoice");
-        userChoice.html(pick.answered[i]);
+        userChoice.html(pick.choice[i]);
         userChoice.attr("data-guess", i);
         $("#answer").append(userChoice);
     }
-}
-console.log(displayQuestion);
 
 //on click that shows outcome for selected answer
 
@@ -131,23 +125,59 @@ $(".answerChoice").on("click", function () {
 
         if (userGuess === pick.answer) {
             stop ();
-            correctCount ++;
+            correct++;
             userGuess ="";
             $("#answer").html("<p> Correct!</p>");
             hidePic();
         }
-})
-}
+        else {
+            stop();
+            incorrect++;
+            userGuess="";
+            $("#answer").html("<p>Wrong! The correct answer is: " + pick.choice[pick.answer] + "</p>");
+            hidePic();
+            }
+        })
+        }
 
 function hidePic () {
     $("#answer").append("<img src=" + pick.photo + ">");
     newArray.push(pick);
     trivia.splice(index,1);
 
-    const hiddenPic = setTimeout (function () {
+    var  hiddenPic = setTimeout (function () {
         $("#answer").empty();
         timer=15;
 
-    if ((Countwrong))
-    })
+    if ((incorrect + correct + notAnswered) === questionCount) {
+        $("#question").empty();
+		$("#question").html("<h3>Game Over!  Here's how you did: </h3>");
+		$("#answer").append("<h4> Correct: " + correct + "</h4>" );
+		$("#answer").append("<h4> Incorrect: " + incorrect + "</h4>" );
+		$("#answer").append("<h4> Unanswered: " + notAnswered + "</h4>" );
+		$("#reset").show();
+		correct = 0;
+		incorrect = 0;
+        notAnswered = 0;
+    
+    } 
+    else {
+		runTimer();
+		displayQuestion();
 }
+	}, 3000);
+}
+
+$("#reset").on("click", function() {
+	$("#reset").hide();
+	$("#answer").empty();
+	$("#question").empty();
+	for(var i = 0; i < holder.length; i++) {
+		trivia.push(holder[i]);
+	}
+	    runTimer();
+	    displayQuestion();
+
+})
+
+})
