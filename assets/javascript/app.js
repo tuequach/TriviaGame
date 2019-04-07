@@ -4,49 +4,49 @@ var  trivia = [
         question: "Who claims that he has worked on the Human Genome Project?",
         choice: ["Eugene", "Abraham", "Gareth", "Rosita"],
         answer: 0,
-        img: "../images/genome.jpg"
+        photo : "assets/images/genome.jpg"
         },
         {
         question: "Quote the person that said this 'In this life now, you kill or you die. Or you die and you kill'?",
         choice: ["Gareth", "Shane", "Rick", "The Govenor"],
         answer: 3,
-        img: "assets/images/lifeordeath.jpg"
+        photo : "assets/images/lifeordeath.jpg"
        },
        {
         question: "Who performs a C-section on Lori?",
         choice: ["Carol", "Hershel", "Beth", "Maggie"],
         answer: 3,
-        img: "assets/images/csection.jpg"
+        photo : "assets/images/csection.jpg"
        },
        {
         question: "Which game do Beth and Daryl play after a harrowing day at a country club?",
         choice: ["Never Have I ever", "Two Truths and A Lie", "Truth or Dare", "Twenty Questions"],
         answer: 0,
-        img: "assets/images/games.jpg"
+        photo : "assets/images/games.jpg"
        },
        {
         question: "What is the name of the Govenor's Daughter?",
         choice: ["Penny", "Abby", "Lizzy", "Kerry"],
         answer: 0,
-        img: "assets/images/daughter.jpg"
+        photo : "assets/images/daughter.jpg"
        },
        {
         question: "In season 1, a doctor says which country almost found a cure for the virus?",
         choice: ["USA", "Australia", "Japan", "France"],
         answer: 3,
-        img: "assets/images/cure.jpg"
+        photo : "assets/images/cure.jpg"
        },
        {
         question: "Which actor has a titanium eye socket in real life?",
         choice: ["Steven Yeun", "Andrew Lincoln", "Norman Reedus", "Jeffrey Dean Morgan"],
         answer: 2,
-        img: "assets/images/titanium.jpg"
+        photo : "assets/images/titanium.jpg"
        },
        {
         question: "What fictional place is Rick originally from?",
         choice: ["Texas", "Georgia", "New York", "Neveda"],
         answer: 1,
-        img: "assts/images/rick.jpg"
+        photo : "assets/images/rick.jpg"
        }];
     
 var  correct = 0;
@@ -93,7 +93,7 @@ function decrement () {
            notAnswered++;
            stop();
            $("#answer").html("<p>Time's Up!, The correct answer is: " + pick.choice[pick.answer]  + "</p>");
-           hidepictureture();
+           hidepicture();
        }
    }
 
