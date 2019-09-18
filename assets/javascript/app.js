@@ -1,3 +1,4 @@
+
 //setting up array for the trivia
 var MCU = [
     {
