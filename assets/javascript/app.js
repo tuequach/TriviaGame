@@ -126,7 +126,7 @@ function newQuestion() {
 
     // laying out new questions and answerchoices
     $("#currenQuestion").html("Question #" + (currentQuestion+1) + "/" + MCU.length);
-    $(".question").html("<h2>" + MCU[currentQuestion].question + "</h2>");
+    $(".question").html("<h3>" + MCU[currentQuestion].question + "</h3>");
 
         //creating a loop for questions and answers
         for (var i=0; i < 4 ; i++) {
