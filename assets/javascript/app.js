@@ -157,7 +157,7 @@ function newQuestion() {
         $("#thisOption").on("click", function(){
             selected =$(this).data('index');
             clearInterval(time);
-            answerPage();
+            finalPage();
         });
 }
 
@@ -175,7 +175,52 @@ function showCountdown() {
     if (seconds < 1) {
         clearInterval(time);
         answered = false;
-        answerPage();
+        finalPage();
     }
 }
 
+function finalPage(){
+    $("#currentQuestion").empty();
+    $("#thisOption").empty();
+    $("#question").empty();
+
+    var correctAnswerText = MCU[currentQuestion].choice[MCU[currentQuestion].answer];
+    var correctAnswerIndex = MCU[currentQuestion].answer;
+
+    //loops to check if answer is correct, incorrect, or not answered
+    if ((selected == correctAnswerIndex) && (answered ==true)) {
+        correctAnswer++;
+        $("#message").html(messages.correct);
+    } else if ((selected != rightAnswerIndex) && (answered ==true)) {
+        incorrectAnswer++;
+        $("#message").html(messages.incorrect);
+        $("#correctAnswer").html("The correct answer was: " + correctAnswerText);
+    } else {
+        unanswered++;
+        $("#message").html(messages.end);
+        $("#correctAnswer").html("The correct answer was: " + correctAnswerText);
+        answered = true;
+    }
+
+    if (currentQuestion == (MCU.length-1)){
+        setTimeout(score, 5000)
+    } else {
+        currentQuestion++;
+        setTimeout(newQuestion, 5000);
+    }
+}
+
+function score() {
+    $("#timeLeft").empty();
+    $("#message").empty();
+    $("#correctAnswer").empty();
+    $("#image").empty();
+
+    $("#finalMessage").html(message.final);
+    $("#allCorrect").html("Correct Answers: " + correctAnswer);
+    $("#allIncorrect").html("Incorrect Answers: " + incorrectAnswer);
+    $("#unanswered").html("Unanswered: " + unanswered);
+    $("#reset").addClass("reset");
+    $("#reset").show();
+    $("#reset").html("Play Again?");
+}
