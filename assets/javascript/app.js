@@ -106,8 +106,8 @@ var selected;
 var messages = { 
     correct: "Correct!",
     incorrect: "Incorrect! The answer is " + correctAnswer,
-    endTime: " Out of time!", 
-    finished: "Lets see your final score and how well you know the answer"
+    end: " Out of time!", 
+    finish: "Lets see your final score and how well you know the answer"
 }
 
 //starting the game with start button
@@ -134,5 +134,48 @@ function newGame(){
 }
 
 function newQuestion() {
-    
+    $("#message").empty();
+    $("#correctAnswer").empty();
+    answered = true;
+
+    // laying out new questions and answerList
+    $("#currenQuestion").html(" Question #" + (currentQuestion+1) + "/" + MCU.length);
+    $("#question").html("<h2>" + MCU[currentQuestion].question + "</h2>");
+
+        //creating a loop for questions and answers
+        for (var i=0; i < 4 ; i++) {
+            var options = $('<div>');
+            options.text(MCU[currentQuestion].choice[i]);
+            options.attr({'data-index': i});
+            options.addClass('thisOption');
+            $("#answeredList").append(options);
+        }
+
+        Timer();
+
+        //functions for when an answer is clicked on
+        $("#thisOption").on("click", function(){
+            selected =$(this).data('index');
+            clearInterval(time);
+            answerPage();
+        });
 }
+
+function Timer (){
+    seconds = 15;
+    $("#timeLeft").html('<h3> Time Remaining: ' + seconds + ' </h3>');
+    answered = true;
+    //setting timer 
+    time = setInterval(showCountdown, 1000);
+}
+
+function showCountdown() {
+    seconds--;
+    $("#timeLeft").html('<h3> Time Remaining: ' + seconds + ' </h3>');
+    if (seconds < 1) {
+        clearInterval(time);
+        answered = false;
+        answerPage();
+    }
+}
+
