@@ -1,4 +1,8 @@
-# unit-5-TriviaGame
+# MCU - TriviaGame
 
-Trivia Game made based on the television show "The Walking Dead"
+Trivia Game made based on the the Marvel Cinnematic Universe 
+
+To Play: 
+
+https://tuequach.github.io/TriviaGame/
 
